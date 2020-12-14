@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rock Paper Scissors</title>
+  <meta charset="UTF-8"/>
+</head>
+<body>
+  <script>
+    game()
+
+    // FUNCTIONS
+    function computerPlay() {
+     let choose = ['Rock', 'Paper', 'Scissors'];
+     let random = Math.floor(Math.random() * choose.length);
+     let choice = choose[random];
+     return (choice);
+    }
+
+    function playRound(playerSelection, computerSelection) {
+     let choose = ['rock', 'paper', 'scissors'];
+     playerSelection = playerSelection.toLowerCase();
+     computerSelection = computerSelection.toLowerCase();
+      if (choose.includes(playerSelection)) {
+        if (playerSelection === computerSelection) {
+          return 0
+        } else if(playerSelection === choose[0]) {
+          if (computerSelection === choose[1]) {
+            return -1
+          } else if (computerSelection === choose[2]) {
+            return 1
+          }
+        } else if(playerSelection === choose[1]) {
+          if (computerSelection === choose[2]) {
+            return -1
+          } else if (computerSelection === choose[0]) {
+            return 1
+          }
+        } else if(playerSelection === choose[2]) {
+          if (computerSelection === choose[0]) {
+            return -1
+          } else if (computerSelection === choose[1]) {
+            return 1
+          }
+        }
+      }
+      return (`Please choose a valid option: (${choose.toString()})`)
+    }
+
+    function getUserInput() {
+      return prompt('Choose Your Hero: Rock, Paper, Scissors')
+    }
+
+    function declareWinner(result, score) {
+      if (result === 1) {
+        alert('Player won!')
+        return (score += result);
+      } else if (result === 0) {
+        alert('It\'s a draw!')
+      } else if (result === -1) {
+        alert('Computer won!')
+      }
+      return (score);
+    }
+
+    function game() {
+      let won = 0;
+      let result;
+      let start = 0;
+      while(start < 5) {
+        start++;
+        result = playRound(getUserInput(), computerPlay());
+        won = declareWinner(result, won);
+      }
+      
+      alert(`Your score was ${won} of 5`);
+    }
+
+    
+  </script>
+</body>
+</html>
